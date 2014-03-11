@@ -44,20 +44,20 @@ public class xignite {
 	 		System.out.println(api_token);
 
 			URL url = new URL("http://globalcurrencies.xignite.com/xGlobalCurrencies.json/ListCurrencies?_token="+ api_token);
+			
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
 	 
 			if (conn.getResponseCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ conn.getResponseCode());
+				throw new RuntimeException("Failed : HTTP error: "
+						+ conn.getResponseCode() + " " + conn.getResponseString());
 			}
 	 
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 				(conn.getInputStream())));
 	 
 			String output="";
-			//JSONObject jsonObj = new JSONObject(output);
 			String fuls = "";
 			System.out.println("Output from Server .... \n");
 			
@@ -66,9 +66,9 @@ public class xignite {
 			}
 
 			
-	 		Object obj = parser.parse(fuls);
-	 		JSONObject jsonObject = (JSONObject) obj;
-	 		JSONArray currencies = (JSONArray) jsonObject.get("CurrencyList");
+	 		Object obj = parser.parse(fuls); 
+	 		JSONObject jsonObject = (JSONObject) obj; // parse entire json response into JSONObject
+	 		JSONArray currencies = (JSONArray) jsonObject.get("CurrencyList"); // get the currencies list
 	 		
 	 		int j = 0;
 
@@ -82,10 +82,12 @@ public class xignite {
 				System.out.println(symbol);
 
 				j++;
-		}
-
-			conn.disconnect();
+			}
 	 
+		  } finally {
+
+		  	conn.disconnect();
+
 		  } catch (MalformedURLException e) {
 	 
 			e.printStackTrace();
