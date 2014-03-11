@@ -7,11 +7,11 @@ A Hello World sample app that makes a simple rest call to Xignite currencies, pa
 
 2) Clone repo and plug API token in config.properties
 
+3) Compile with library included in classpath
 
-Java version "1.6.0_65"
+================================================================
+
+Java version: "1.6.0_65"
 
 Uses JSON simple library for parsing JSON.
 JSON-simple: https://code.google.com/p/json-simple/
-
-
-Make sure to include JSON library in classpath and include the API token in the config.properties file
