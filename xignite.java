@@ -84,10 +84,6 @@ public class xignite {
 				j++;
 			}
 	 
-		  } finally {
-
-		  	conn.disconnect();
-
 		  } catch (MalformedURLException e) {
 	 
 			e.printStackTrace();
@@ -97,9 +93,14 @@ public class xignite {
 			e.printStackTrace();
 	 
 		  } catch (ParseException e) {
+			
 			e.printStackTrace();
-		}
- 
+
+		  }	finally {
+
+		  	conn.disconnect();
+
+		  }
 	}
  
 }
